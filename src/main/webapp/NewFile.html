@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+
+<link rel="stylesheet" href="styles/leaflet.css">
+
+<script type="text/javascript" src="scripts/leaflet.js"></script>
+
+<style type="text/css">
+
+.hover{
+	background-color: #ffff00;
+}
+
+</style>
+
+
+
+</head>
+<body>
+<div id="holder">
+	<div id='map' style="width:500px;height:300px;">
+	</div>
+</div>
+
+	<p id="upload" class="hidden"><label>Drag &amp; drop not supported, but you can still upload via this input field:<br><input type="file"></label></p>
+	<p id="filereader">File API &amp; FileReader API not supported</p>
+	<p id="formdata">XHR2's FormData is not supported</p>
+	<p id="progress">XHR2's upload progress isn't supported</p>
+	<p>Upload progress: <progress id="uploadprogress" min="0" max="100" value="0">0</progress></p>
+	
+</body>
+
+<script>
+var doc = document.documentElement;
+
+doc.ondragover=function(){
+	this.className='hover';
+	return false;
+};
+
+doc.ondragleave=function(){
+	this.className='';
+	return false;
+};
+
+doc.ondragend=function(){
+	this.className='';
+	return false;
+};
+
+doc.ondrop=function(event){
+	event.preventDfault && event.preventDefault();
+	this.className='';
+	
+	var files=event.dataTransfer.files;
+	
+	var formData = new FormData();
+	for (var i = 0; i < files.length; i++) {
+	  formData.append('file', files[i]);
+	}
+
+	// now post a new XHR request
+	var xhr = new XMLHttpRequest();
+	xhr.open('POST', '/testWebMap2/webresources/myresource/upload');
+	xhr.onload = function () {
+	  if (xhr.status === 200) {
+	    console.log('all done: ' + xhr.status);
+	    console.log(xhr.responseText);
+	    
+	    var bg = L.tileLayer.wms("http://localhost:8082/geoserver/cite/wms", {
+	        layers: 'shp',
+	        format: 'image/png',
+	        transparent: true
+	    });
+	    
+	    map.addLayer(bg);
+	    
+	  } else {
+	    console.log('Something went terribly wrong...');
+	  }
+	};
+
+	xhr.send(formData);
+	
+	return false;
+};
+
+var dndSupported=function(){
+	var div=document.createElement('div');
+	return ('draggable' in div) || ('ondragstart' in div && 'ondrop' in div)
+};
+
+if(!dndSupported()){
+	console.log("browser doesn't support drag and drop");
+}
+
+document.getElementById('upload').onchange = function (event) {
+	// `this` refers to the element the event fired upon
+	var files = this.files;
+};
+
+
+var map = L.map('map', {
+    center: [37.8, -96],
+    zoom: 4
+});
+
+var base = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+    attribution: 'Map data &copy; 2011 OpenStreetMap contributors, Imagery &copy; 2011 CloudMade'
+  });
+  
+
+  
+  //yy 0507
+  map.addLayer(base);
+  
+
+	
+</script>
+
+</html>

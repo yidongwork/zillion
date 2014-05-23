@@ -1,0 +1,17 @@
+.editPanel {
+  border: 0px solid black;
+  display: block;
+  width: 108px;
+  position:relative;
+  z-index:1200;
+}
+.editPanel.opened > .body { display: block; }
+.editPanel.closed > .body { display: none; }
+.editPanel > .body {
+	
+  padding: .1em .3em;
+}
+.districtSpan {
+	cursor: pointer;
+}
+		

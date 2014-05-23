@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="testWebMap2">
+        <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
+        <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
+        <dependent-module archiveName="slf4j-api-1.5.3.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/C:/addtionaljarfile/slf4j-api-1.5.3.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="slf4j-log4j12-1.5.3.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/C:/addtionaljarfile/slf4j-log4j12-1.5.3.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="geoserver-manager2.0.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/C:/addtionaljarfile/geoserver-manager2.0.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="log4j-1.2.14.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/C:/addtionaljarfile/log4j-1.2.14.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="map.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/C:/addtionaljarfile/map.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <property name="context-root" value="testWebMap2"/>
+        <property name="java-output-path" value="/testWebMap2/target/classes"/>
+    </wb-module>
+</project-modules>
